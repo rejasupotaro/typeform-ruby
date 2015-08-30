@@ -1,5 +1,7 @@
 require "typeform/version"
+require "typeform/client"
 
 module Typeform
-  # Your code goes here...
+  class << self
+  end
 end
