@@ -44,6 +44,11 @@ module Typeform
       response
     end
 
+    def show_form(id)
+      response = get "/forms/#{id}"
+      response
+    end
+
     def create_form_from_json(json)
       response = post "/forms", json
       response
