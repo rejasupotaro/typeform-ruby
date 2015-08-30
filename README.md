@@ -1,36 +1,75 @@
 # Typeform
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/typeform`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'typeform'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install typeform
+[Typeform I/O](http://typeform.io/) client for Ruby.
 
 ## Usage
 
-TODO: Write usage instructions here
+### Initialize Client
 
-## Development
+```ruby
+typeform_api_key = ENV['TYPEFORM_API_KEY']
+client = Typeform::Client.new(typeform_api_key)
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake rspec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+### Get API information
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+If you want to make sure your authentication and connection to Typeform I/O works, call `Typeform::Client#information`.
 
-## Contributing
+```ruby
+client.information
+```
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/typeform.
+The response contains information about the API. It is useful for testing or making sure you have access.
 
+```json
+{
+  "name": "Typeform I/O Build API",
+  "description": "Build API for creating forms awesomely",
+  "version": "v0.4",
+  "documentation": "https://docs.typeform.io/",
+  "support": "support@typeform.io",
+  "time": "2015-05-26 17:55:23 +0000"
+}
+```
+
+### Create a typeform
+
+Call `Typeform::Client#create_form_from_file` to create a new typeform.
+
+```ruby
+file = File.open("example/example.json")
+client.create_form_from_file(file)
+```
+
+You have parameters to set the title, webhook URL and of course, the fields. The form endpoint will also return you a hash of URLs that you can use to distribute your typeform or delete it.
+
+```json
+{
+  "id": "keEwsGeuC",
+  "title": "My first typeform",
+  "fields": [
+    {
+      "type": "short_text",
+      "question": "What is your name?"
+    }
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://api.typeform.io/latest/forms/keEwsGeuC"
+    },
+    {
+      "rel": "form_render",
+      "href": "https://forms.typeform.io/to/keEwsGeuC"
+    }
+  ]
+}
+```
+
+### Show typeform
+
+You can get the structure back of a typeform. It's useful if you want to allow your users to edit their typeform or you just want to get the URL of the typeform by leveraging the links.rel['form_render'].href link.
+
+```ruby
+client.show_form(form_id)
+```

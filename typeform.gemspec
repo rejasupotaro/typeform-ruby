@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'typeform/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "typeform"
+  spec.name          = "typeform-ruby"
   spec.version       = Typeform::VERSION
   spec.authors       = ["Kentaro Takiguchi"]
   spec.email         = ["kentaro-takiguchi@cookpad.com"]
