@@ -1,0 +1,9 @@
+{
+  "title": "title",
+  "fields": [
+    {
+      "type": "short_text",
+      "question": "short_text"
+    }
+  ]
+}
