@@ -9,7 +9,7 @@ client = Typeform::Client.new(typeform_api_key)
 # pp client.information
 
 # show form
-pp client.show_form("tPvxO8qyP6gIzg")
+# pp client.show_form("tPvxO8qyP6gIzg")
 
 # create_form_from_json
 field = Typeform::Field.new

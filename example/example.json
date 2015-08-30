@@ -3,7 +3,25 @@
   "fields": [
     {
       "type": "short_text",
-      "question": "short_text"
+      "question": "short_text",
+      "required": false,
+      "choices": [
+        {
+          "label": "Bicing"
+        },
+        {
+          "label": "Car"
+        },
+        {
+          "label": "Metro"
+        },
+        {
+          "label": "Bus"
+        },
+        {
+          "label": "Helicopter"
+        }
+      ]
     }
   ]
 }

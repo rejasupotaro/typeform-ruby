@@ -1,6 +1,6 @@
 require "typeform/version"
-require "typeform/entity/form"
-require "typeform/entity/field"
+require "typeform/form"
+require "typeform/field"
 require "faraday"
 require "faraday_middleware"
 require "json"
