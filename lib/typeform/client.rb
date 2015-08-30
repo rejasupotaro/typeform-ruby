@@ -1,4 +1,5 @@
 require "typeform/version"
+require "typeform/connection"
 require "typeform/form"
 require "typeform/field"
 require "faraday"
@@ -7,56 +8,24 @@ require "json"
 
 module Typeform
   class Client
-    @@base_uri = "https://api.typeform.io"
-
     def initialize(api_key)
-      @api_key = api_key
-      @conn = Faraday.new(url: @@base_uri) do |faraday|
-        faraday.request :json
-        faraday.response :logger
-        faraday.adapter  Faraday.default_adapter
-        faraday.use FaradayMiddleware::ParseJson, :content_type => /\bjson$/
-      end
-    end
-
-    def set_base_headers(request)
-      request.headers["X-API-TOKEN"] = @api_key
-      request.headers["Content-Type"] = "application/json; charset=utf-8"
-      request.headers["Accept-Encoding"] = "gzip, deflate"
-    end
-
-    def get(path)
-      @conn.get do |request|
-        set_base_headers(request)
-        request.url "/v0.3#{path}"
-      end
-    end
-
-    def post(path, body)
-      @conn.post do |request|
-        set_base_headers
-        request.url "/v0.3#{path}"
-      end
+      @conn = Connection.new(api_key)
     end
 
     def information
-      response = get "/"
-      response
+      @conn.get "/"
     end
 
     def show_form(id)
-      response = get "/forms/#{id}"
-      response
+      @conn.get "/forms/#{id}"
     end
 
     def create_form_from_json(json)
-      response = post "/forms", json
-      response
+      @conn.post "/forms", json
     end
 
     def create_form_from_file(file)
-      response = create_form_from_json(JSON.parse(file.read))
-      response
+      create_form_from_json(JSON.parse(file.read))
     end
   end
 end
