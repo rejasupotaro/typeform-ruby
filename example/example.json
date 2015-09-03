@@ -1,10 +1,17 @@
 {
-  "title": "title",
+  "title": "Sandbox - Example #1",
   "fields": [
     {
-      "type": "short_text",
-      "question": "short_text"
+      "type": "multiple_choice",
+      "question": "How do you normally get to work?",
+      "choices": [
+        {
+          "label": "Metro"
+        },
+        {
+          "label": "Car"
+        }
+      ]
     }
-  ],
-  "webhook_submit_url": "https://webhook_submit_url.com"
+  ]
 }

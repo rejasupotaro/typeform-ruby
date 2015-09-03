@@ -6,25 +6,33 @@ typeform_api_key = ENV['TYPEFORM_API_KEY']
 client = Typeform::Client.new(typeform_api_key)
 
 # information
-pp client.information
+# pp client.information.body
 
 # show form
-pp client.show_form("tPvxO8qyP6gIzg")
+# pp client.show_form("tPvxO8qyP6gIzg")
 
 # create_form_from_json
-# field = Typeform::Field.new
-# field.type = "multiple_choice"
-# field.question = "What is your name?"
-# field.description = "description"
-# field.required = false
-# field.choices = [{label: "A"}]
-# form = Typeform::Form.new
-# form.title = "title"
-# form.fields = [field]
-# form.design_id = "design_id"
-# form.webhook_submit_url = "https://webhook_submit_url.com"
-# pp client.create_form_from_json(form.as_json).body
+choice1 = Typeform::Choice.new
+choice1.label = "Metro"
+choice2 = Typeform::Choice.new
+choice2.label = "Car"
+
+field1 = Typeform::Field.new
+field1.type = "multiple_choice"
+field1.question = "How do you normally get to work?"
+field1.description = "On most days..."
+field1.required = false
+field1.choices = [choice1, choice2]
+
+form = Typeform::Form.new
+form.title = "title"
+form.fields = [field1]
+form.webhook_submit_url = "http://webhook_submit_url.com"
+
+pp form.as_json
+
+pp client.create_form_from_json(form.as_json).body
 
 # create_form_from_file
-file = File.open("example/example.json")
-pp client.create_form_from_file(file)
+# file = File.open("example/example.json")
+# pp client.create_form_from_file(file)
