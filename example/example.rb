@@ -26,5 +26,5 @@ pp client.show_form("tPvxO8qyP6gIzg")
 # pp client.create_form_from_json(form.as_json).body
 
 # create_form_from_file
-# file = File.open("example/example.json")
-# pp client.create_form_from_file(file)
+file = File.open("example/example.json")
+pp client.create_form_from_file(file)
