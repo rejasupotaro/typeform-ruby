@@ -20,7 +20,7 @@ module Typeform
     end
 
     def design_id
-      @design_id
+      @design_id ||= ""
     end
 
     def webhook_submit_url
